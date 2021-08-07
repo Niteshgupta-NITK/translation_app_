@@ -5,11 +5,11 @@ from pymongo import MongoClient
 app = Flask(__name__)
 # cors = CORS(app);
 app.config['SECRET_KEY'] = 'hbidh3r9yygc'
-client = MongoClient()
+# client = MongoClient()
 
-db = client.data
-
-database = db.dataBase
+# db = client.data
+# 
+# database = db.dataBase
 
 
 

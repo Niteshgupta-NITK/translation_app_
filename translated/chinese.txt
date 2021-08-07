@@ -1,0 +1,1 @@
+In order to express user posts, I use a list, each of which is a dictionary with author and a text field.When I really implement the user and blog articles, I will try to keep these field names as much as possible so that all the work of these false objects design and test the home page template will continue when I introduce real users and posts.

@@ -87,13 +87,13 @@
       <div class="col-12 col-lg-6" style="display: grid; grid-template-columns: repeat(2, 1fr); width: 100%;">
         <!-- one row for one file ;and entery -->
         {% for file in files %}
-           <div class="row mt-5 grid-item" data-lang='{{file.lang}}'>
+           <div class="row mt-5 grid-item" data-lang="{{file.split(',')[1]}}">
             <div class="col">
-              <h4>{{file.name}}</h4>
+              <h4>{{file.split(',')[0]}}</h4>
             </div>
-            <div class="col-auto" style="color: #00aaff;"><a href="view/{{file.name}}"><i class="bi bi-eye-fill"></i></a> </div>
-            <div class="col-auto" style="color: #ffaa00;"><a href="edit/{{file.name}}"><i class="bi bi-pencil"></i></a> </div>
-            <div class="col-auto" style="color: #ff0011;"><a href="delete/{{file.name}}"><i class="bi bi-trash-fill"></i></a> </div>
+            <div class="col-auto" style="color: #00aaff;"><a href="view/{{file.split(',')[0]}}"><i class="bi bi-eye-fill"></i></a> </div>
+           <!--  <div class="col-auto" style="color: #ffaa00;"><a href="edit/{{file.split(',')[0]}}"><i class="bi bi-pencil"></i></a> </div>
+            <div class="col-auto" style="color: #ff0011;"><a href="delete/{{file.split(',')[0]}}"><i class="bi bi-trash-fill"></i></a> </div> -->
           </div>
         {% endfor %}
         <!-- one row ends -->
