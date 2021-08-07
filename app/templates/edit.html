@@ -1,0 +1,348 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+      body {
+        margin: 0;
+      }
+      .header button{
+        font-size: 150%;
+        background: none;
+        border: none;
+        position: relative;
+        bottom: 3px;
+      }
+
+    
+      .main a i{
+        font-size: 170%;
+      }
+      .main a{
+        text-decoration: none;
+        color: unset;
+
+      }
+      .main .wrapper{
+        border: solid 1px black;
+        border-radius: 10px;
+      }
+
+      main {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10vmin;
+      }
+
+      main div {
+        width: 92.5%;
+        /* margin-left: 2.5%; */
+      }
+
+      main .summary {
+        box-shadow: 0 0 .4vmin .4vmin #3332;
+        height: 20vmin;
+        position: relative;
+      }
+
+      main .summary p.head {
+        width: 100%;
+        text-indent: 3vmin;
+        height: 4vmin;
+        font-family: sans-serif;
+        font-size: 2.4vmin;
+        color: #666;
+        background: #eee;
+        line-height: 4vmin;
+      }
+
+      main .files {
+        width: 95%;
+        margin-top: 5vmin;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      main .file {
+        box-shadow: 0 0 .4vmin .4vmin #3332;
+        height: 50vmin;
+        width: 95%;
+        margin-left: 2.5%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      main .file p.head {
+         width: 100%;
+        text-indent: 3vmin;
+        height: 4vmin;
+        font-family: sans-serif;
+        font-size: 2.4vmin;
+        color: #666;
+        background: #eee;
+        line-height: 4vmin;
+      }
+
+      main .file p.head span {
+        float: right;
+        margin-right: 5vmin;
+      }
+
+      main .file .cont {
+        width: 100%;
+        /* position: relative; */
+        /* overflow: scroll; */
+      }
+
+       main .summary textarea {
+        height: 16vmin;
+        width: 100%;
+        position: absolute;
+        top: 4vmin;
+        border: none;
+      }
+
+      main .file textarea {
+        height: 50vmin;
+        width: 100%;
+        position: absolute;
+        top: 4vmin;
+        border: none;
+      }
+
+      main .file .cont .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: start;
+        width: 100%;
+        margin-top: 0;
+      }
+
+       main .file .cont .row p.sn {
+        width: 5%;
+       }
+
+      main .file .cont .row p.line {
+        background: #fff;
+        width: 90%;
+       }
+
+
+    </style>
+    <title>Translator</title>
+  </head>
+  <body>
+    <div class="container-fluid row header mt-3">
+        <div class="col">
+          <h1 class="text-primary">Translator</h1>
+        </div>
+        <div class="col-6 col-lg-3 row g-0">
+          <div class="col">
+            <input type="search" class="form-control">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-light btn-sm"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+    </div>
+
+    <form action="/save-edit" method="post">
+    <main>
+
+      <div class="summary">
+        <p class="head">
+          Summary
+        </p>
+        <textarea class="cont" name="summary">{{data.summary}}</textarea>
+      </div>
+      <div class="files">
+        
+        <div class="file">
+          <p class="head">
+            {{data.ref_name}}
+            <span>{{data.lang}}</span>
+            
+          </p>
+          <div class="cont">
+            
+            {% for i in range(ref_body|length) %}
+
+              <div class="row">
+                <p class="sn">{{i+1}}</p>
+                <p class="line">{{ref_body[i]}}</p>
+              </div>
+
+            {% endfor %}
+
+          </div>
+        </div>
+
+        <div class="file">
+          <p class="head">
+            {{data.name}}
+            <span>en</span>
+            
+          </p>
+          <div class="cont">
+            
+            <textarea name="body" id="" cols="30" rows="10">{{body}}</textarea>
+
+          </div>
+        </div>        
+
+
+
+      </div>
+
+       <div class="row mb-3" style="margin-top: 5vmin;">
+          <div class="col">
+            <button class="btn btn-secondary w-100" type="reset">Cancel</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-success w-100" type="submit">Save</button>
+          </div>
+        </div>
+
+        <input type="text" name="file" value="{{data.name}}" hidden>
+        <input type="text" name="lang" value="{{data.lang}}" hidden>
+
+    </main>
+  </form>
+   
+    
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+      .header button{
+        font-size: 150%;
+        background: none;
+        border: none;
+        position: relative;
+        bottom: 3px;
+      }
+      .main .wrapper{
+        border: solid 1px black;
+        border-radius: 10px;
+      }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid row header mt-3">
+        <div class="col">
+          <h1 class="text-primary">Translator</h1>
+        </div>
+        <div class="col-6 col-lg-3 row g-0">
+          <div class="col">
+            <input type="search" class="form-control">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-light btn-sm"><i class="bi bi-search"></i></button>
+          </div>
+        </div>
+    </div>
+
+    <div class="row main container-fluid justify-content-center mt-3 ">
+      <form action="/save-edit" method="post" class="col-12 col-md-10 col-lg-7 wrapper">
+        <input type="text" value="{{file}}" name='file' hidden>
+        <div class="row">
+          <div class="col">
+            <h2>{{file}}</h2>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="mb-3">
+            <label for="para" class="form-label"><h2>Summary</h2></label>
+            <input type="text" id="para" name="summary" class="form-control"> 
+          </div>
+        </div>
+
+        <input type="text" name="lang" value="{{l}}" hidden>
+
+        <div class="row mt-3">
+
+
+          <div class="mb-3">
+            <label for="description" class="form-label"><h2>Body</h2></label>
+            <textarea name="body" class="form-control" id="description" rows="6">
+              {{body}}
+            </textarea>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col">
+            <button class="btn btn-secondary w-100" type="reset">Cancel</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-success w-100" type="submit">Save</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+
+ 
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </body>
+</html>
+ -->

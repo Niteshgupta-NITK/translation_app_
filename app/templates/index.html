@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <title>ML-Bootstrap</title>
+    <style>
+      .header button{
+        font-size: 150%;
+        background: none;
+        border: none;
+        position: relative;
+        bottom: 3px;
+      }
+      .main a i{
+        font-size: 170%;
+      }
+      .main a{
+        text-decoration: none;
+        color: unset;
+      }
+
+      .grid-item:hover {
+        background: #eee;
+        /* color: #; */
+      }
+
+      .grid-item {
+        width: 90%; margin-left: 5%; background: #fff; color: #333; box-shadow: 0 1vmin 1vmin #2222; font-size: 2vmin;
+        height: 6vmin;
+        line-height: 6vmin;
+      }
+
+      .grid-item h4 {
+        line-height: 6vmin;
+      }
+
+
+
+    </style>
+  </head>
+  <body>
+   
+    <div class="container-fluid row header mt-3">
+        <div class="col">
+          <h1 class="text-primary" onclick="javascript:window.location = '/'">Translator</h1>
+        </div>
+        <form method="post" action='/search' class="col-6 col-lg-3 row g-0">
+          <div class="col">
+            <input type="text" value="{{search}}" name="search" class="form-control">
+          </div>
+          <div class="col-auto">
+            <button class="btn btn-light btn-sm"><i class="bi bi-search"></i></button>
+          </div>
+        </form>
+    </div>
+
+    <div class="main row container-fluid">
+
+      <div class="col-12 row filter">
+        <div class="col">
+          <select class="form-select" aria-label="Default select example">
+            <option> <i class="bi bi-filter"></i> Filter</option>
+            <option value="1">Bangla</option>
+            <option value="2">Chinese</option>
+            <option value="3">three</option>
+            <option value="4">four</option>
+          </select>
+        </div>
+        <form class="col row" action="/translate" method="POST" enctype="multipart/form-data">
+          <div class="col">
+            <input type="file" name='untranslated' accept=".txt" class="form-control">
+          </div>
+          <div class="col-2">
+            <button class="btn btn-primary">
+              upload
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="col-12 col-lg-6" style="display: grid; grid-template-columns: repeat(2, 1fr); width: 100%;">
+        <!-- one row for one file ;and entery -->
+        {% for file in files %}
+           <div class="row mt-5 grid-item" data-lang='{{file.lang}}'>
+            <div class="col">
+              <h4>{{file.name}}</h4>
+            </div>
+            <div class="col-auto" style="color: #00aaff;"><a href="view/{{file.name}}"><i class="bi bi-eye-fill"></i></a> </div>
+            <div class="col-auto" style="color: #ffaa00;"><a href="edit/{{file.name}}"><i class="bi bi-pencil"></i></a> </div>
+            <div class="col-auto" style="color: #ff0011;"><a href="delete/{{file.name}}"><i class="bi bi-trash-fill"></i></a> </div>
+          </div>
+        {% endfor %}
+        <!-- one row ends -->
+
+        
+
+      </div>
+    </div>
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+  </body>
+</html>
